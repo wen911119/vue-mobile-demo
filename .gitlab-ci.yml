@@ -12,16 +12,16 @@ build_package:
   image: registry.docker-cn.com/library/node:alpine 
   script: 
   - echo $image
-  # - npm install -g cnpm --registry=https://registry.npm.taobao.org
-  # - cnpm install
-  # - npm run build
+  - npm install -g cnpm --registry=https://registry.npm.taobao.org
+  - cnpm install
+  - npm run build
 build_images:
    stage: docker-build
    # 国内镜像加速
-   image: docker:latest
+   image: registry.docker-cn.com/library/docker:latest
    services:
    # 国内镜像加速
-   - name: docker:dind
+   - name: registry.docker-cn.com/library/docker:dind
      # 需要设置别名,等于 --link 的别名
      alias: docker
    cache: 
