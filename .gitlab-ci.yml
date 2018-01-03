@@ -17,6 +17,11 @@ build_package:
   - npm run build
 build_images:
    stage: docker-build
+   cache: 
+     # 从[npm-build]的state 切换到 [docker-build]的state时, 上一步build 出来的dist目录默认会被删除清空
+     # 所以要加这个项 保证这个目录被缓存
+     paths:
+     - dist/
    # 国内镜像加速
    image: registry.docker-cn.com/library/docker:latest
    services:
@@ -24,11 +29,6 @@ build_images:
    - name: registry.docker-cn.com/library/docker:dind
      # 需要设置别名,等于 --link 的别名
      alias: docker
-   cache: 
-     # 从[npm-build]的state 切换到 [docker-build]的state时, 上一步build 出来的dist目录默认会被删除清空
-     # 所以要加这个项 保证这个目录被缓存
-     paths:
-     - dist/
    script:
     - echo $image
     - ls
