@@ -18,10 +18,10 @@ build_package:
 build_images:
    stage: docker-build
    # 国内镜像加速
-   image: registry.docker-cn.com/library/docker:latest
+   image: docker:latest
    services:
    # 国内镜像加速
-   - name: registry.docker-cn.com/library/docker:dind
+   - name: docker:dind
      # 需要设置别名,等于 --link 的别名
      alias: docker
    cache: 
