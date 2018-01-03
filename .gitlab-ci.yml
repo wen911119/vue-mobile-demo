@@ -1,6 +1,6 @@
 #### 需要gitlab-runner 以特权模式运行 ####
 stages:
-  # - npm-build
+  - npm-build
   - docker-build
 before_script:
   - dockerservice=registry.cn-shanghai.aliyuncs.com/ruiyun2015/vue-mobile-demo:`TZ=CST-8 date '+%Y%m%d-%H%M'`
@@ -12,9 +12,9 @@ build_package:
   image: registry.docker-cn.com/library/node:alpine 
   script: 
   - echo $image
-  - npm install -g cnpm --registry=https://registry.npm.taobao.org
-  - cnpm install
-  - npm run build
+  # - npm install -g cnpm --registry=https://registry.npm.taobao.org
+  # - cnpm install
+  # - npm run build
 build_images:
    stage: docker-build
    # 国内镜像加速
