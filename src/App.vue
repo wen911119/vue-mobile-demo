@@ -35,6 +35,7 @@
     body {
         margin: 0;
         padding: 0;
+        height: 100%;
     }
 
     #app {
@@ -73,17 +74,17 @@
         transition: all .5s
     }
 
-    .slide-left-leave {
+    /* .slide-left-leave {
         left: -10rem;
-    }
+    } */
 
     .slide-left-enter {
         left: 10rem;
     }
 
-    .slide-right-leave {
+    /* .slide-right-leave {
         left: 10rem;
-    }
+    } */
 
     .slide-right-enter {
         left: -10rem;
