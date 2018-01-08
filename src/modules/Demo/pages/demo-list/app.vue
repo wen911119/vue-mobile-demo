@@ -1,9 +1,17 @@
 <template>
-    <div class="login-page">
+    <div class="app-page">
         demo-list
-        <router-link to="/demo/vuex">vuex demo</router-link>
-        <router-link to="/demo/iconfont">iconfont demo</router-link>
-        <router-link to="/demo/i18n">i18n demo</router-link>
+        <ul>
+            <li>
+                <router-link to="/demo/vuex" class="text36">vuex demo</router-link>
+            </li>
+            <li>
+                <router-link to="/demo/iconfont" class="text36">iconfont demo</router-link>
+            </li>
+            <li>
+                <router-link to="/demo/i18n" class="text36">i18n demo</router-link>
+            </li>
+        </ul>
     </div>
 </template>
 <script>
