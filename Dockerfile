@@ -20,7 +20,7 @@ RUN ls
 
 # 第二阶段打包镜像
 # 基础镜像
-FROM nginx:stable-alpine
+FROM registry.docker-cn.com/library/nginx:stable-alpine
 # 维护者信息
 LABEL maintainer="wen911119@gmail.com"
 
