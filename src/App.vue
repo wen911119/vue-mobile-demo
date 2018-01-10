@@ -11,14 +11,16 @@
         name: 'app',
         data() {
             return {
-                transitionName: 'slide-left'
+                transitionName: ''
             }
         },
         watch: {
             '$route'(to, from) {
-                const toDepth = to.path.split('/').length
-                const fromDepth = from.path.split('/').length
-                this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+                if(from.name){
+                    const toDepth = to.path.split('/').length
+                    const fromDepth = from.path.split('/').length
+                    this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+                }
             }
         },
     }
@@ -70,7 +72,7 @@
 
     .slide-left-enter-active,
     .slide-right-enter-active {
-        transition: left .5s;
+        transition: left .3s;
         z-index: 12;
     }
     .slide-left-leave-active,
