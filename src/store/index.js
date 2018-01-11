@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Demo from './modules/Demo/index'
+import Demo from './modules/demo/index'
 import CommonList from './modules/CommonList/index'
 
 Vue.use(Vuex)
