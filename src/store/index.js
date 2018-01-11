@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import demo from './modules/demo/index'
+import Demo from './modules/Demo/index'
+import CommonList from './modules/CommonList/index'
 
 Vue.use(Vuex)
 
@@ -14,7 +15,8 @@ export default new Vuex.Store({
     getters: {},
     mutations: {},
     modules: {
-        demo
+        Demo,
+        CommonList
     },
     strict: debug
 })
