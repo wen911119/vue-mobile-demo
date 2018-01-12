@@ -27,8 +27,8 @@
         },
         async mounted() {
             try {
-                let ret = await POST('/test')
-                console.log(ret, 99999)
+                // let ret = await POST('/test')
+                // console.log(ret, 99999)
             } catch (err) {
                 console.log(err, 44444)
             }

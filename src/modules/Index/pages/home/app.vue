@@ -17,15 +17,17 @@
         },
         computed: {
             ...mapState({
-                list:state=>state.CommonList.list
+                list: state => state.CommonList.list
             })
         },
-        created(){
-            this.fetchListData('/restapi/shopping/v3/restaurants?latitude=31.19161900000001&longitude=121.5011301&offset=8&limit=8&extras[]=activities&extras[]=tags&extra_filters=home&rank_id=046aa9ad33c74af7b00876396c70b15d&terminal=h5')
+        created() {
+            const url = '/restapi/shopping/v3/restaurants?latitude=31.19161900000001&longitude=121.5011301&offset=8&limit=8&extras[]=activities&extras[]=tags&extra_filters=home&rank_id=046aa9ad33c74af7b00876396c70b15d&terminal=h5'
+            const format = ret => ret.data.items
+            this.fetchListData({ url, format })
         },
-        methods:{
+        methods: {
             ...mapActions({
-                fetchListData:"CommonList/fetchListData"
+                fetchListData: "CommonList/fetchListData"
             })
         }
     }
