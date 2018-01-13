@@ -1,7 +1,11 @@
 <template>
-    <div class="base-list">
-        
-    </div>
+    <ul class="base-list">
+        <li v-for="item in list">
+            <slot name="item" :item="item">
+                <!-- 这里写入备用内容 -->
+            </slot>
+        </li>
+    </ul>
 </template>
 <script>
     export default {
@@ -19,5 +23,4 @@
     }
 </script>
 <style scoped>
-
 </style>

@@ -1,13 +1,13 @@
 <template>
     <div class="app-page">
-        <ul>
-            <li v-for="item in list" :key="item.restaurant.id">
-                {{item.restaurant.name}}
-            </li>
-        </ul>
+        <base-list :list="list">
+            <home-list-item slot="item" slot-scope="props" :item="props.item.restaurant"></home-list-item>
+        </base-list>
     </div>
 </template>
 <script>
+    import BaseList from '@/components/BaseList.vue'
+    import HomeListItem from './components/HomeListItem.vue'
     import { mapState, mapActions } from 'vuex'
     export default {
         data() {
@@ -29,6 +29,10 @@
             ...mapActions({
                 fetchListData: "CommonList/fetchListData"
             })
+        },
+        components: {
+            BaseList,
+            HomeListItem
         }
     }
 </script>
