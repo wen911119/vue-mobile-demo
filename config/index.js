@@ -34,8 +34,8 @@ module.exports = {
          */
 
         // https://webpack.js.org/configuration/devtool/#development
-        devtool: 'inline-source-map',
-        // devtool: 'cheap-module-eval-source-map',
+        // devtool: 'inline-source-map',
+        devtool: 'cheap-module-eval-source-map',
 
         
 

@@ -3,12 +3,12 @@ import { LOADING } from '@/interfaces/indicator'
 import axios from 'axios'
 const base_url = process.env.API_URL
 
-export function GET(url, params, loading = true) {
+export function GET(url, params = {}, loading = true) {
     if (isWeb()) {
         url = base_url + url
         return new Promise((resolve, reject) => {
             loading && LOADING('show')
-            axios.get(url, params).then(res => {
+            axios.get(url, { params }).then(res => {
                 LOADING('hide')
                 resolve(res)
             }).catch(err => {
@@ -16,7 +16,7 @@ export function GET(url, params, loading = true) {
                 reject(err)
             })
         })
-    }else{
+    } else {
         // todo 其它环境的实现
     }
 }

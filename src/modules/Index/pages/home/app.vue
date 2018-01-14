@@ -21,9 +21,20 @@
             })
         },
         created() {
-            const url = '/restapi/shopping/v3/restaurants?latitude=31.19161900000001&longitude=121.5011301&offset=8&limit=8&extras[]=activities&extras[]=tags&extra_filters=home&rank_id=046aa9ad33c74af7b00876396c70b15d&terminal=h5'
+            const url = '/restapi/shopping/v3/restaurants'
+            const params = {
+                'latitude': 31.19161900000001,
+                'longitude': 121.5011301,
+                'offset': 8,
+                'limit': 8,
+                'extras[]': 'activities',
+                'extras[]': 'tags',
+                'extra_filters': 'home',
+                'rank_id': '046aa9ad33c74af7b00876396c70b15d',
+                'terminal': 'h5'
+            }
             const format = ret => ret.data.items
-            this.fetchListData({ url, format })
+            this.fetchListData({ url, params, format })
         },
         methods: {
             ...mapActions({
