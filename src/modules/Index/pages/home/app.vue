@@ -1,14 +1,17 @@
 <template>
-    <div class="app-page">
-        <base-list :list="list" :url="url" :filters="params" :format="format">
+    <app-layout class="app-page">
+        <div class="header" slot="layout-top">header</div>
+        <base-list :list="list" :url="url" :filters="params" :format="format" slot="layout-content">
             <home-list-item slot="item" slot-scope="props" :item="props.item"></home-list-item>
         </base-list>
-    </div>
+        <div class="bottom" slot="layout-bottom">bottom</div>
+    </app-layout>
 </template>
 <script>
     import BaseList from '@/components/BaseList.vue'
     import HomeListItem from './components/HomeListItem.vue'
     import { mapState, mapActions } from 'vuex'
+    import AppLayout from 'vue-app-layout'
     export default {
         data() {
             return {
@@ -49,12 +52,13 @@
             ...mapActions({
                 fetchListData: "CommonList/fetchListData"
             }),
-            format: ret => ({ 
+            format: ret => ({
                 list: ret.data.data.list,
-                pageNum:ret.data.data.fpage.pageNum
-             })
+                pageNum: ret.data.data.fpage.pageNum
+            })
         },
         components: {
+            AppLayout,
             BaseList,
             HomeListItem
         }
