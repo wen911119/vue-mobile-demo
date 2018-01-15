@@ -6,6 +6,7 @@
                 <span slot="header-right" class="iconfont">{{toggleMenu?'&#xe629;':'&#xe628;'}}</span>
             </magic-header>
             <base-tabs-menu class="tabs-menu" v-if="toggleMenu"></base-tabs-menu>
+            <the-filters-bar></the-filters-bar>
         </div>
         <base-list :list="list" :url="url" :filters="params" :format="format" slot="layout-content">
             <home-list-item slot="item" slot-scope="props" :item="props.item"></home-list-item>
@@ -15,6 +16,7 @@
 <script>
     import MagicHeader from '@/components/MagicHeader.vue'
     import BaseTabsMenu from '@/components/BaseTabsMenu.vue'
+    import TheFiltersBar from './components/TheFiltersBar.vue'
     import BaseList from '@/components/BaseList.vue'
     import HomeListItem from './components/HomeListItem.vue'
     import { mapState, mapActions } from 'vuex'
@@ -68,6 +70,7 @@
         components: {
             MagicHeader,
             BaseTabsMenu,
+            TheFiltersBar,
             AppLayout,
             BaseList,
             HomeListItem

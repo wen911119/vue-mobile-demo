@@ -5,7 +5,7 @@
                 <span class="left-icon iconfont" @click="back">&#xe60c;</span>
             </slot>
         </div>
-        <div class="header-title h-c text36">
+        <div class="header-title h-c text32">
             <slot>标题</slot>
         </div>
         <div class="header-right flex-1" @click="$emit('rightClick')">
