@@ -1,17 +1,20 @@
 <template>
     <app-layout class="app-page">
-        <magic-header slot="layout-top">
-            列表页
-            <span slot="header-right" class="iconfont">&#xe629;</span>
-        </magic-header>
+        <div class="top-area" slot="layout-top">
+            <magic-header @rightClick="toggleMenu=!toggleMenu">
+                列表页
+                <span slot="header-right" class="iconfont">{{toggleMenu?'&#xe629;':'&#xe628;'}}</span>
+            </magic-header>
+            <base-tabs-menu class="tabs-menu" v-if="toggleMenu"></base-tabs-menu>
+        </div>
         <base-list :list="list" :url="url" :filters="params" :format="format" slot="layout-content">
             <home-list-item slot="item" slot-scope="props" :item="props.item"></home-list-item>
         </base-list>
-        <div class="bottom" slot="layout-bottom">bottom</div>
     </app-layout>
 </template>
 <script>
     import MagicHeader from '@/components/MagicHeader.vue'
+    import BaseTabsMenu from '@/components/BaseTabsMenu.vue'
     import BaseList from '@/components/BaseList.vue'
     import HomeListItem from './components/HomeListItem.vue'
     import { mapState, mapActions } from 'vuex'
@@ -22,7 +25,8 @@
                 url: '/banggo/search/get-search-goods/a_a_a_a_a_a_a_a_a_a_a_a.shtml',
                 params: {
                     word: ''
-                }
+                },
+                toggleMenu: false
             }
         },
         computed: {
@@ -63,6 +67,7 @@
         },
         components: {
             MagicHeader,
+            BaseTabsMenu,
             AppLayout,
             BaseList,
             HomeListItem
