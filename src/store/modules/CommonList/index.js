@@ -5,7 +5,12 @@ const CommonList = {
     namespaced: true,
     state() {
         return {
-            list: []
+            list: [],
+            info: {
+                pageNum: 999,
+                pageSize: 10,
+                currentPage: 0
+            }
         }
     },
     actions,

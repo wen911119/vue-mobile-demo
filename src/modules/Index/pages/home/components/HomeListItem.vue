@@ -2,15 +2,14 @@
     <div class="home-list-item flex bd-0-0-1-0">
         <img :src="imgSrc" alt="" class="item-pic">
         <div class="item-right flex flex-column flex-gap">
-            <div>{{item.name}}</div>
-            <div>{{item.address}}</div>
-            <div>{{item.phone}}</div>
+            <div>{{item.productName}}</div>
+            <div>{{item.brandName}}</div>
+            <div>{{item.salesPrice}}</div>
         </div>
     </div>
 </template>
 <script>
     import { isIOS } from '@/utils/env'
-    import panel from 'slots-panel'
     export default {
         props: {
             item: {
@@ -20,16 +19,8 @@
         },
         computed: {
             imgSrc() {
-                const reg = this.item.image_path.match(/(.{1})(.{2})(.{29})(.+)/)
-                if (isIOS()) {
-                    return `//fuss10.elemecdn.com/${reg[1]}/${reg[2]}/${reg[3]}${reg[4]}.${reg[4]}?imageMogr/thumbnail/!130x130r/gravity/Center/crop/130x130/`
-                } else {
-                    return `//fuss10.elemecdn.com/${reg[1]}/${reg[2]}/${reg[3]}${reg[4]}.${reg[4]}?imageMogr/format/webp/thumbnail/!130x130r/gravity/Center/crop/130x130/`
-                }
+                return this.item.imgUrl_300_300.replace('banggo', 'ruiyun2015')
             }
-        },
-        components: {
-            panel
         }
     }
 </script>

@@ -1,6 +1,7 @@
 const CommonListMutations = {
-    LOAD(state, payload) {
-        state.list = payload.list
+    LOAD_MORE(state, payload) {
+        state.info.currentPage++
+        state.list = state.list.concat(payload.list)
     }
 }
 
