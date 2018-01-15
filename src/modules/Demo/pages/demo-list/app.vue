@@ -1,6 +1,6 @@
 <template>
     <div class="app-page">
-        demo-list2
+        demo-list3
         <ul>
             <li>
                 <router-link to="/demo/vuex" class="text36">vuex demo</router-link>
