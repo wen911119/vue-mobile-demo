@@ -1,6 +1,9 @@
 <template>
     <app-layout class="app-page">
-        <div class="header" slot="layout-top">header</div>
+        <magic-header slot="layout-top">
+            列表页
+            <span slot="header-right" class="iconfont">&#xe629;</span>
+        </magic-header>
         <base-list :list="list" :url="url" :filters="params" :format="format" slot="layout-content">
             <home-list-item slot="item" slot-scope="props" :item="props.item"></home-list-item>
         </base-list>
@@ -8,6 +11,7 @@
     </app-layout>
 </template>
 <script>
+    import MagicHeader from '@/components/MagicHeader.vue'
     import BaseList from '@/components/BaseList.vue'
     import HomeListItem from './components/HomeListItem.vue'
     import { mapState, mapActions } from 'vuex'
@@ -58,6 +62,7 @@
             })
         },
         components: {
+            MagicHeader,
             AppLayout,
             BaseList,
             HomeListItem

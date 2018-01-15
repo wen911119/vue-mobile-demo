@@ -1,5 +1,5 @@
 <template>
-    <ul class="base-list" v-infinite-scroll="loadMore">
+    <ul class="base-list" v-infinite-scroll="loadMore" infinite-scroll-distance="10">
         <li v-for="item in list">
             <slot name="item" :item="item">
                 <!-- 这里写入备用内容 -->
