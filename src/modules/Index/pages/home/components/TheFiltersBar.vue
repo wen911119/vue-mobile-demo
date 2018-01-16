@@ -3,13 +3,13 @@
         <div class="filters-menu flex flex-row flex-v-center flex-gap pd-0-30">
             <div class="index flex flex-v-center" :class="[filters.sort.indexOf('price')<0?'active':'']" @click="extend">
                 <span class="sub-text text26">{{filters.sort==='date'?'新品':filters.sort==='sale'?'销量':'综合'}}</span>
-                <label class="iconfont">&#xe601;</label>
+                <i class="triangle" :class="[open?'triangle-up':'triangle-down']"></i>
             </div>
             <div class="goods flex flex-v-center" @click="sortByPrice">
                 <span class="sub-text text26" :class="[filters.sort.indexOf('price')>-1?'active':'']">价格</span>
-                <div class="arrow-group flex flex-column">
-                    <label class="iconfont" :class="[filters.sort==='priceUp'?'active':'']">&#xe602;</label>
-                    <label class="iconfont" :class="[filters.sort==='priceDown'?'active':'']">&#xe601;</label>
+                <div class="arrow-group flex flex-column flex-gap">
+                    <i class="triangle triangle-up" :class="[filters.sort==='priceUp'?'active-up':'']"></i>
+                    <i class="triangle triangle-down" :class="[filters.sort==='priceDown'?'active-down':'']"></i>
                 </div>
             </div>
             <div class="shop flex flex-v-center" :class="[filters.onlyStock?'active':'']" @click="toggleStock">
@@ -22,7 +22,7 @@
                 <span class="transform iconfont">&#xe627;</span>
             </div>
         </div>
-        <div class="fold-layer" v-if="open" @click="open=false">
+        <div class="fold-layer" v-if="open" @click="open=false" @touchmove="touchmove">
             <ul class="sort-options pd-20-30 bg-w">
                 <li class="text26 sort-item" :class="[filters.sort==='default'?'active':'']" @click="filters.sort='default'">综合排序</li>
                 <li class="text26 sort-item" :class="[filters.sort==='date'?'active':'']" @click="filters.sort='date'">新品优先</li>
@@ -56,6 +56,9 @@
             },
             extend() {
                 this.open = !this.open
+            },
+            touchmove(e) {
+                e.preventDefault();
             }
         }
     }
@@ -64,11 +67,6 @@
     .filters-menu {
         height: 1rem;
         background-color: #f5f5f5;
-    }
-
-    label {
-        margin-left: 0.1rem;
-        font-size: 0.1rem;
     }
 
     .transform {
@@ -83,15 +81,46 @@
         color: #f8584f !important;
     }
 
+    .active>.triangle-up,
+    .active-up {
+        border-bottom-color: #f8584f !important;
+    }
+
+    .active>.triangle-down,
+    .active-down {
+        border-top-color: #f8584f !important;
+    }
+
     .fold-layer {
         position: fixed;
         height: 1000px;
         width: 100%;
         background-color: rgba(0, 0, 0, .3);
+        z-index: 1;
     }
 
     .sort-item {
         height: 1rem;
         line-height: 1rem;
+    }
+
+    .arrow-group {
+        height: 0.25rem;
+    }
+
+    .triangle {
+        width: 0;
+        height: 0;
+        border-left: 0.08rem solid transparent;
+        border-right: 0.08rem solid transparent;
+        margin-left: 0.08rem;
+    }
+
+    .triangle-down {
+        border-top: 0.08rem solid #919191;
+    }
+
+    .triangle-up {
+        border-bottom: 0.08rem solid #919191;
     }
 </style>

@@ -1,8 +1,7 @@
 <template>
     <app-layout class="app-page">
         <div class="top-area" slot="layout-top">
-            <magic-header @rightClick="toggleMenu=!toggleMenu">
-                列表页
+            <magic-header @rightClick="toggleMenu=!toggleMenu" :title="'列表页'">
                 <span slot="header-right" class="iconfont">{{toggleMenu?'&#xe629;':'&#xe628;'}}</span>
             </magic-header>
             <base-tabs-menu class="tabs-menu" v-if="toggleMenu"></base-tabs-menu>
@@ -33,7 +32,8 @@
         },
         computed: {
             ...mapState({
-                list: state => state.CommonList.list
+                list: state => state.CommonList.list,
+                currentPage: state => state.CommonList.info.currentPage
             })
         },
         created() {

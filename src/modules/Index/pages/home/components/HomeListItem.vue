@@ -2,9 +2,9 @@
     <div class="home-list-item flex bd-0-0-1-0">
         <img :src="imgSrc" alt="" class="item-pic">
         <div class="item-right flex flex-column flex-gap">
-            <div>{{item.productName}}</div>
-            <div>{{item.brandName}}</div>
-            <div>{{item.salesPrice}}</div>
+            <div class="text24">{{item.productName}}</div>
+            <div class="text24">{{item.brandName}}</div>
+            <div class="text24">{{item.salesPrice}}</div>
         </div>
     </div>
 </template>
