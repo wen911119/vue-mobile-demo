@@ -29,6 +29,7 @@
     .tabs-menu {
         height: 1rem;
         background-color: #f5f5f5;
+        overflow: hidden;
     }
     label{
         margin-left: 0.1rem;

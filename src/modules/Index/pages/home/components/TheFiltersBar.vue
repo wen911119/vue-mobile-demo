@@ -22,13 +22,17 @@
                 <span class="transform iconfont">&#xe627;</span>
             </div>
         </div>
-        <div class="fold-layer" v-if="open" @click="open=false" @touchmove="touchmove">
-            <ul class="sort-options pd-20-30 bg-w">
-                <li class="text26 sort-item" :class="[filters.sort==='default'?'active':'']" @click="filters.sort='default'">综合排序</li>
-                <li class="text26 sort-item" :class="[filters.sort==='date'?'active':'']" @click="filters.sort='date'">新品优先</li>
-                <li class="text26 sort-item" :class="[filters.sort==='sale'?'active':'']" @click="filters.sort='sale'">销量从高到低</li>
-            </ul>
-        </div>
+        <transition name="fade">
+            <div class="fold-layer" v-show="open" @click="open=false" @touchmove="touchmove">
+                <transition name="down">
+                    <ul class="sort-options pd-0-30 bg-w" v-if="open">
+                        <li class="text26 sort-item" :class="[filters.sort==='default'?'active':'']" @click="filters.sort='default'">综合排序</li>
+                        <li class="text26 sort-item" :class="[filters.sort==='date'?'active':'']" @click="filters.sort='date'">新品优先</li>
+                        <li class="text26 sort-item" :class="[filters.sort==='sale'?'active':'']" @click="filters.sort='sale'">销量从高到低</li>
+                    </ul>
+                </transition>
+            </div>
+        </transition>
     </div>
 </template>
 <script>
@@ -99,6 +103,16 @@
         z-index: 1;
     }
 
+    .fade-enter,
+    .fade-leave-to {
+        opacity: 0;
+    }
+
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity .2s;
+    }
+
     .sort-item {
         height: 1rem;
         line-height: 1rem;
@@ -122,5 +136,20 @@
 
     .triangle-up {
         border-bottom: 0.08rem solid #919191;
+    }
+
+    .sort-options {
+        height: 3rem;
+        overflow: hidden;
+    }
+
+    .down-enter,
+    .down-leave-to {
+        height: 0;
+    }
+
+    .down-enter-active,
+    .down-leave-active {
+        transition: height .2s;
     }
 </style>

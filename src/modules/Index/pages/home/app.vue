@@ -4,7 +4,9 @@
             <magic-header @rightClick="toggleMenu=!toggleMenu" :title="'列表页'">
                 <span slot="header-right" class="iconfont">{{toggleMenu?'&#xe629;':'&#xe628;'}}</span>
             </magic-header>
-            <base-tabs-menu class="tabs-menu" v-if="toggleMenu"></base-tabs-menu>
+            <transition name="tabs-show">
+                <base-tabs-menu class="tabs-menu" v-if="toggleMenu"></base-tabs-menu>
+            </transition>
             <the-filters-bar></the-filters-bar>
         </div>
         <base-list :list="list" :url="url" :filters="params" :format="format" slot="layout-content">
@@ -78,4 +80,12 @@
     }
 </script>
 <style scoped>
+    .tabs-show-enter,
+    .tabs-show-leave-to{
+        height: 0 !important;
+    }
+    .tabs-show-enter-active,
+    .tabs-show-leave-active{
+        transition: height 0.2s;
+    }
 </style>
