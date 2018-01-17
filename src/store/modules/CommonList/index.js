@@ -7,7 +7,7 @@ const CommonList = {
         return {
             list: [],
             info: {
-                pageNum: 999,
+                pageNum: 0,
                 pageSize: 10,
                 currentPage: 0
             }
