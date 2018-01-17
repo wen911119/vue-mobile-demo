@@ -10,6 +10,11 @@ const CommonListActions = {
                 list,
                 pageNum
             })
+        } else if (type === 'refresh') {
+            commit('REFRESH', {
+                list,
+                pageNum
+            })
         }
     }
 }

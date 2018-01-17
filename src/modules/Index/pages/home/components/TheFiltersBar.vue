@@ -46,6 +46,14 @@
                 open: false
             }
         },
+        watch: {
+            filters: {
+                handler: function (nv, ov) {
+                    this.$emit('change', nv)
+                },
+                deep: true
+            }
+        },
         methods: {
             toggleStock() {
                 this.filters.onlyStock = !this.filters.onlyStock

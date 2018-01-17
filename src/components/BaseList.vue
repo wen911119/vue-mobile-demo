@@ -1,16 +1,19 @@
 <template>
     <div>
-        <ul class="base-list" v-infinite-scroll="loadMore" infinite-scroll-distance="10">
-            <li v-for="item in list">
+        <ul class="base-list" v-infinite-scroll="loadMore" scroll-to-top-listen-for-event="scroll-top">
+            <li v-for="(item,index) in list" :key="index">
                 <slot name="item" :item="item">
                     <!-- 这里写入备用内容 -->
                 </slot>
             </li>
+            <li>
+                <div class="loading flex flex-x-center" v-if="currentPage<pageNum">
+                    <div class="loader text32"></div>
+                    <span class="loading-text sub-text text30">正在加载中...</span>
+                </div>
+            </li>
         </ul>
-        <div class="loading flex flex-x-center" v-if="currentPage<pageNum">
-            <div class="loader text32"></div>
-            <span class="loading-text sub-text text30">正在加载中...</span>
-        </div>
+
     </div>
 </template>
 <script>
@@ -18,21 +21,19 @@
     import { mapState, mapActions } from 'vuex'
     export default {
         props: {
-            list: {
-                type: Array,
-                default: []
-            },
             url: {
                 type: String,
                 required: true
             },
-            filters: {
-                type: Object,
-                required: false
-            },
             format: {
                 type: Function,
                 required: false
+            }
+        },
+        data() {
+            return {
+                filters: {},
+                immediateCheck: false
             }
         },
         computed: {
@@ -45,21 +46,24 @@
             ...mapState({
                 currentPage: state => state.CommonList.info.currentPage,
                 pageSize: state => state.CommonList.info.pageSize,
-                pageNum: state => state.CommonList.info.pageNum
+                pageNum: state => state.CommonList.info.pageNum,
+                list: state => state.CommonList.list
             })
-        },
-        data() {
-            return {
-
-            }
         },
         methods: {
             ...mapActions({
                 fetchListData: "CommonList/fetchListData"
             }),
             loadMore() {
-                this.fetchListData({ url: this.url, params: this._filters, format: this.format, type: 'load-more' })
+                this.fetchListData({
+                    url: this.url, params: this._filters, format: this.format, type: 'load-more'
+                })
                 console.log('load-more')
+            },
+            refresh(params) {
+                this.$emit('scroll-top')
+                this.filters = params
+                this.fetchListData({ url: this.url, params: Object.assign(this._filters, { currentPage: 1 }), format: this.format, type: 'refresh' })
             }
         },
         directives: {
