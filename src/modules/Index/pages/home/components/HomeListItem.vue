@@ -4,7 +4,7 @@
         <div class="item-right flex flex-column flex-gap">
             <div class="text24">{{item.productName}}</div>
             <div class="text24">{{item.brandName}}</div>
-            <div class="text24">{{item.productId}}</div>
+            <div class="text24">{{item.salesPrice}}</div>
         </div>
     </div>
 </template>

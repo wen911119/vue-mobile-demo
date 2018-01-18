@@ -9,7 +9,7 @@
             </transition>
             <the-filters-bar @change="filtersChange"></the-filters-bar>
         </div>
-        <base-list ref="list" :url="url" :format="format" slot="layout-content">
+        <base-list :filters="params" :url="url" :format="format" slot="layout-content">
             <home-list-item slot="item" slot-scope="props" :item="props.item"></home-list-item>
         </base-list>
     </app-layout>
@@ -31,7 +31,9 @@
                     discountRate: 'a',
                     ts: '',
                     controller: 'search',
-                    suffix: '.shtml'
+                    suffix: '.shtml',
+                    avn: '',
+                    sort: 'default'
                 },
                 toggleMenu: false
             }
@@ -42,7 +44,13 @@
                 pageNum: ret.data.data.fpage.pageNum
             }),
             filtersChange(v) {
-                this.$refs.list.refresh(Object.assign(this.params, v))
+                if (v.onlyStock) {
+                    this.params.avn = 1
+                } else {
+                    this.params.avn = ''
+                }
+                this.params.sort = v.sort
+                // this.$refs.list.refresh(Object.assign(this.params, v))
             }
         },
         components: {

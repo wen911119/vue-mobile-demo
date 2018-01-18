@@ -25,6 +25,10 @@
                 type: String,
                 required: true
             },
+            filters: {
+                type: Object,
+                default: {}
+            },
             format: {
                 type: Function,
                 required: false
@@ -32,17 +36,10 @@
         },
         data() {
             return {
-                filters: {},
-                immediateCheck: false
+                
             }
         },
         computed: {
-            _filters() {
-                return Object.assign({
-                    pageSize: this.pageSize,
-                    currentPage: this.currentPage + 1
-                }, this.filters)
-            },
             ...mapState({
                 currentPage: state => state.CommonList.info.currentPage,
                 pageSize: state => state.CommonList.info.pageSize,
@@ -50,20 +47,31 @@
                 list: state => state.CommonList.list
             })
         },
+        watch: {
+            filters: {
+                handler: function (nv) {
+                    this.$emit('scroll-top')
+                    let _params = Object.assign({
+                        currentPage: 1,
+                        pageSize: this.pageSize
+                    }, nv)
+                    this.fetchListData({ url: this.url, params: _params, format: this.format, type: 'refresh' })
+                },
+                deep: true
+            }
+        },
         methods: {
             ...mapActions({
                 fetchListData: "CommonList/fetchListData"
             }),
             loadMore() {
+                let _params = Object.assign({
+                    currentPage: this.currentPage + 1,
+                    pageSize: this.pageSize
+                }, this.filters)
                 this.fetchListData({
-                    url: this.url, params: this._filters, format: this.format, type: 'load-more'
+                    url: this.url, params: _params, format: this.format, type: 'load-more'
                 })
-                console.log('load-more')
-            },
-            refresh(params) {
-                this.$emit('scroll-top')
-                this.filters = params
-                this.fetchListData({ url: this.url, params: Object.assign(this._filters, { currentPage: 1 }), format: this.format, type: 'refresh' })
             }
         },
         directives: {
