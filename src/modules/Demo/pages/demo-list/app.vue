@@ -14,15 +14,22 @@
             <li>
                 <router-link to="/ele/home" class="text36">ele</router-link>
             </li>
+            <li>
+                <div class="download" @click="download">下载</div>
+            </li>
         </ul>
     </div>
 </template>
 <script>
     import { POST } from '@/interfaces/network'
+    import XLSX from 'xlsx'
+    var FileSaver = require('file-saver');
     export default {
         data() {
             return {
-
+                test: [
+                    ["aaaaa", "bbbbb", "ccccc","ddddd","eeee","ffffff","ggggg","hhhhhh"]
+                ]
             }
         },
         async mounted() {
@@ -32,7 +39,25 @@
             } catch (err) {
                 console.log(err, 44444)
             }
-
+        },
+        methods: {
+            download() {
+                let temp = []
+                temp.push(["aaaaa", "bbbbb", "ccccc","ddddd","eeee","ffffff","ggggg","hhhhhh"])
+                for(let i=0;i<10000;i++){
+                    const arr = [i,i+1,i+2,i+3,i+4,i+5,i+6,i+7]
+                    temp.push(arr)
+                }
+                console.time('excel')
+                var worksheet = XLSX.utils.aoa_to_sheet(temp);
+                var new_workbook = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(new_workbook, worksheet, "SheetJS");
+                var wopts = { bookType: 'xlsx', bookSST: false, type: 'array' };
+                var wbout = XLSX.write(new_workbook, wopts);
+                FileSaver.saveAs(new Blob([wbout], { type: "application/octet-stream" }), "testwww2.xlsx");
+                console.timeEnd('excel')
+                
+            }
         }
     }
 </script>
