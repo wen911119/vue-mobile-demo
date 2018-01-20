@@ -9,7 +9,7 @@
             </transition>
             <the-filters-bar @change="filtersChange"></the-filters-bar>
         </div>
-        <base-list :filters="params" :url="url" :format="format" slot="layout-content">
+        <base-list ref="list" :url="url" :format="format" slot="layout-content">
             <home-list-item slot="item" slot-scope="props" :item="props.item"></home-list-item>
         </base-list>
     </app-layout>
@@ -26,15 +26,6 @@
         data() {
             return {
                 url: '/banggo/search/get-search-goods/a_a_a_a_a_a_a_a_a_a_a_a.shtml',
-                params: {
-                    word: '',
-                    discountRate: 'a',
-                    ts: '',
-                    controller: 'search',
-                    suffix: '.shtml',
-                    avn: '',
-                    sort: 'default'
-                },
                 toggleMenu: false
             }
         },
@@ -44,13 +35,20 @@
                 pageNum: ret.data.data.fpage.pageNum
             }),
             filtersChange(v) {
-                if (v.onlyStock) {
-                    this.params.avn = 1
-                } else {
-                    this.params.avn = ''
+                let params = {
+                    word: '',
+                    discountRate: 'a',
+                    ts: '',
+                    controller: 'search',
+                    suffix: '.shtml'
                 }
-                this.params.sort = v.sort
-                // this.$refs.list.refresh(Object.assign(this.params, v))
+                if (v.onlyStock) {
+                    params.avn = 1
+                } else {
+                    params.avn = ''
+                }
+                params.sort = v.sort
+                this.$refs.list.doFilter(params)
             }
         },
         components: {

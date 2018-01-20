@@ -13,7 +13,6 @@
                 </div>
             </li>
         </ul>
-
     </div>
 </template>
 <script>
@@ -25,53 +24,30 @@
                 type: String,
                 required: true
             },
-            filters: {
-                type: Object,
-                default: {}
-            },
             format: {
                 type: Function,
                 required: false
             }
         },
-        data() {
-            return {
-                
-            }
-        },
         computed: {
             ...mapState({
                 currentPage: state => state.CommonList.info.currentPage,
-                pageSize: state => state.CommonList.info.pageSize,
                 pageNum: state => state.CommonList.info.pageNum,
                 list: state => state.CommonList.list
             })
         },
-        watch: {
-            filters: {
-                handler: function (nv) {
-                    this.$emit('scroll-top')
-                    let _params = Object.assign({
-                        currentPage: 1,
-                        pageSize: this.pageSize
-                    }, nv)
-                    this.fetchListData({ url: this.url, params: _params, format: this.format, type: 'refresh' })
-                },
-                deep: true
-            }
+        created() {
+            this.initList({ url: this.url, format: this.format })
         },
         methods: {
             ...mapActions({
-                fetchListData: "CommonList/fetchListData"
+                initList: "CommonList/initList",
+                loadMore: "CommonList/loadMore",
+                applyFilters: "CommonList/applyFilters"
             }),
-            loadMore() {
-                let _params = Object.assign({
-                    currentPage: this.currentPage + 1,
-                    pageSize: this.pageSize
-                }, this.filters)
-                this.fetchListData({
-                    url: this.url, params: _params, format: this.format, type: 'load-more'
-                })
+            doFilter(p) {
+                this.$emit('scroll-top')
+                this.applyFilters(p)
             }
         },
         directives: {

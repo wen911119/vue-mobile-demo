@@ -12,7 +12,7 @@ const CommonListMutations = {
     },
     APPLY_FILTERS(state, payload) {
         state.info.currentPage = 0
-        state.filters = payload
+        state.filters = Object.assign(state.filters, payload)
     },
     REFRESH_LIST(state, payload) {
         const { format } = state

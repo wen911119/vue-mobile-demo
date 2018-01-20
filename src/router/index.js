@@ -4,7 +4,8 @@ const demoList = () => import('@/modules/Demo/pages/demo-list/app.vue')
 const vuexDemo = () => import('@/modules/Demo/pages/vuex-demo/app.vue')
 const iconfontDemo = () => import('@/modules/Demo/pages/iconfont-demo/app.vue')
 const i18nDemo = () => import('@/modules/Demo/pages/i18n-demo/app.vue')
-const EleIndex = () => import('@/modules/Goods/pages/list/app.vue')
+const EleIndex = () => import('@/modules/Index/pages/home/app.vue')
+const GoodsList = () => import('@/modules/Goods/pages/list/app.vue')
 Vue.use(Router)
 
 export default new Router({
@@ -33,6 +34,11 @@ export default new Router({
             path: '/ele/home',
             name: 'ele',
             component: EleIndex
+        },
+        {
+            path: '/banggo/list',
+            name: 'ele',
+            component: GoodsList
         },
         { path: '*', redirect: '/demo' }
     ]
