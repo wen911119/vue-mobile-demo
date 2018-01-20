@@ -62,4 +62,7 @@
     }
 </script>
 <style>
+    .download{
+        height: 20rem;
+    }
 </style>

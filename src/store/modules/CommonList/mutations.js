@@ -1,13 +1,21 @@
 const CommonListMutations = {
-    LOAD_MORE(state, payload) {
-        state.info.currentPage++
-        state.list = state.list.concat(payload.list)
-        state.info.pageNum = payload.pageNum
+    INIT_LIST(state, payload) {
+        state.url = payload.url
+        state.format = payload.format
     },
-    REFRESH(state, payload) {
-        state.info.currentPage = 1
-        state.list = payload.list
-        state.info.pageNum = payload.pageNum
+    LOAD_MORE(state, payload) {
+        const { format } = state
+        const { list, pageNum } = format(payload)
+        state.list = state.list.concat(list)
+        state.info.pageNum = pageNum
+        state.info.currentPage++
+    },
+    APPLY_FILTERS(state, payload) {
+        state.info.currentPage = 0
+        state.filters = payload
+    },
+    UPDATE_STATUS(state, payload) {
+        state.status = payload
     }
 }
 

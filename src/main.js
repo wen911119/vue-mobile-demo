@@ -5,8 +5,9 @@ if (window.__INITIAL_STATE__) {
     store.replaceState(window.__INITIAL_STATE__)
 }
 import router from './router'
-
+import Cube from 'cube-ui'
 import VueI18n from 'vue-i18n'
+Vue.use(Cube)
 Vue.use(VueI18n)
 const i18n = new VueI18n({
     locale: 'zh-CN', // 默认中文
