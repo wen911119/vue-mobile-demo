@@ -14,6 +14,13 @@ const CommonListMutations = {
         state.info.currentPage = 0
         state.filters = payload
     },
+    REFRESH_LIST(state, payload) {
+        const { format } = state
+        const { list, pageNum } = format(payload)
+        state.list = list
+        state.info.pageNum = pageNum
+        state.info.currentPage = 1
+    },
     UPDATE_STATUS(state, payload) {
         state.status = payload
     }

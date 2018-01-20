@@ -21,9 +21,19 @@ const CommonListActions = {
         }
 
     },
-    applyFilters({ commit }, filters) {
-        console.log(filters, 3333333)
+    async applyFilters({ commit, state, getters }, filters) {
         commit('APPLY_FILTERS', filters)
+        const { url } = state
+        const { params } = getters
+        commit('UPDATE_STATUS', 'LOADING')
+        try {
+            let ret = await GET(url, params)
+            commit('REFRESH_LIST', ret)
+            commit('UPDATE_STATUS', 'DONE')
+        } catch (e) {
+            console.log(e)
+            commit('UPDATE_STATUS', 'ERROR')
+        }
     }
 }
 

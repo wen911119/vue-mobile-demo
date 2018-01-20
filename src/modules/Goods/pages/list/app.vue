@@ -1,5 +1,5 @@
 <template>
-    <app-page @pullingUp="pullingUp" :status="status">
+    <app-page @pullingUp="pullingUp" @pullingDown="pullingDown" :data="list">
         <div slot="page-top">
             <magic-header :title="'列表页'" @rightClick="toggleMenu=!toggleMenu">
                 <span slot="header-right" class="iconfont">{{toggleMenu?'&#xe629;':'&#xe628;'}}</span>
@@ -45,7 +45,7 @@
                 sort: 'default'
             }
             this.applyFilters(filters)
-            this.loadMore()
+            // this.loadMore()
         },
         methods: {
             format: ret => ({
@@ -57,6 +57,19 @@
                 if (this.status === 'DONE') {
                     this.loadMore()
                 }
+            },
+            pullingDown() {
+                const filters = {
+                    word: '',
+                    discountRate: 'a',
+                    ts: '',
+                    controller: 'search',
+                    suffix: '.shtml',
+                    avn: '',
+                    sort: 'default'
+                }
+                console.log('refresh')
+                this.applyFilters(filters)
             },
             ...mapActions({
                 initList: "CommonList/initList",
