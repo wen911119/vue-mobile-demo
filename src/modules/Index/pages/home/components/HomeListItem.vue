@@ -1,5 +1,5 @@
 <template>
-    <div class="home-list-item flex bd-0-0-1-0">
+    <div class="home-list-item flex bd-0-0-1-0" @click="$emit('click')">
         <img :src="imgSrc" alt="" class="item-pic">
         <div class="item-right flex flex-column flex-gap">
             <div class="text24">{{item.productName}}</div>

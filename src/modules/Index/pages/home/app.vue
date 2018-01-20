@@ -1,5 +1,5 @@
 <template>
-    <app-layout class="app-page">
+    <app-layout class="app-page" @onScroll="onScroll">
         <div class="top-area" slot="layout-top">
             <magic-header @rightClick="toggleMenu=!toggleMenu" :title="'列表页'">
                 <span slot="header-right" class="iconfont">{{toggleMenu?'&#xe629;':'&#xe628;'}}</span>
@@ -9,9 +9,11 @@
             </transition>
             <the-filters-bar @change="filtersChange"></the-filters-bar>
         </div>
-        <base-list ref="list" :url="url" :format="format" slot="layout-content">
-            <home-list-item slot="item" slot-scope="props" :item="props.item"></home-list-item>
-        </base-list>
+        <base-scroller slot="layout-content" @onScroll="onScroll" @onBottom="onBottom" ref="goodsListScroller">
+            <base-list ref="list" :url="url" :format="format">
+                <home-list-item slot="item" slot-scope="props" :item="props.item" @click="goToDetail(props.item.productId)"></home-list-item>
+            </base-list>
+        </base-scroller>
     </app-layout>
 </template>
 <script>
@@ -19,15 +21,20 @@
     import BaseTabsMenu from '@/components/BaseTabsMenu.vue'
     import TheFiltersBar from './components/TheFiltersBar.vue'
     import BaseList from '@/components/BaseList.vue'
+    import BaseScroller from '@/components/BaseScroller.vue'
     import HomeListItem from './components/HomeListItem.vue'
     import { mapState, mapActions } from 'vuex'
-    import AppLayout from 'vue-app-layout'
+    // import AppLayout from 'vue-app-layout'
+    import AppLayout from '@/components/BaseLayout.vue'
     export default {
         data() {
             return {
                 url: '/banggo/search/get-search-goods/a_a_a_a_a_a_a_a_a_a_a_a.shtml',
                 toggleMenu: false
             }
+        },
+        mounted() {
+            this.$refs.list.doFilter({})
         },
         methods: {
             format: ret => ({
@@ -49,6 +56,16 @@
                 }
                 params.sort = v.sort
                 this.$refs.list.doFilter(params)
+                this.$refs.goodsListScroller.scrollToTop()
+            },
+            goToDetail(pid) {
+                this.$router.push(`goods/${pid}`)
+            },
+            onScroll(p) {
+                console.log(p)
+            },
+            onBottom() {
+                this.$refs.list.loadMore()
             }
         },
         components: {
@@ -57,7 +74,8 @@
             TheFiltersBar,
             AppLayout,
             BaseList,
-            HomeListItem
+            HomeListItem,
+            BaseScroller
         }
     }
 </script>
@@ -70,5 +88,6 @@
     .tabs-show-enter-active,
     .tabs-show-leave-active {
         transition: height 0.2s;
+
     }
 </style>

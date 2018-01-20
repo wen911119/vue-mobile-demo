@@ -12,7 +12,7 @@
                 <router-link to="/demo/i18n" class="text36">i18n demo</router-link>
             </li>
             <li>
-                <router-link to="/ele/home" class="text36">ele</router-link>
+                <router-link to="/banggo/goods" class="text36">ele</router-link>
             </li>
             <li>
                 <div class="download" @click="download">下载</div>

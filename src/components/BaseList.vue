@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ul class="base-list" v-infinite-scroll="loadMore" scroll-to-top-listen-for-event="scroll-top">
+        <ul class="base-list">
             <li v-for="(item,index) in list" :key="index">
                 <slot name="item" :item="item">
                     <!-- 这里写入备用内容 -->
@@ -46,7 +46,6 @@
                 applyFilters: "CommonList/applyFilters"
             }),
             doFilter(p) {
-                this.$emit('scroll-top')
                 this.applyFilters(p)
             }
         },

@@ -39,11 +39,14 @@
         padding: 0;
         height: 100%;
     }
-
     #app {
         height: 100%;
     }
-
+    .content{
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
     ul,
     li {
         list-style: none;
