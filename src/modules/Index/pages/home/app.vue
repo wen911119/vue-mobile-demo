@@ -24,8 +24,7 @@
     import BaseScroller from '@/components/BaseScroller.vue'
     import HomeListItem from './components/HomeListItem.vue'
     import { mapState, mapActions } from 'vuex'
-    // import AppLayout from 'vue-app-layout'
-    import AppLayout from '@/components/BaseLayout.vue'
+    import AppLayout from 'vue-app-layout'
     export default {
         data() {
             return {
