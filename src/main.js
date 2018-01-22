@@ -5,6 +5,20 @@ if (window.__INITIAL_STATE__) {
     store.replaceState(window.__INITIAL_STATE__)
 }
 import router from './router'
+console.log(router.push, 44444)
+let temp = router.push.bind(router)
+router.push = (p) => {
+    if (p.path) {
+        store.dispatch('Router/push', { url: p.path })
+    } else {
+        store.dispatch('Router/push', { url: p })
+    }
+    temp(p)
+}
+router.back2 = ()=>{
+    alert()
+}
+
 import Cube from 'cube-ui'
 import VueI18n from 'vue-i18n'
 Vue.use(Cube)
@@ -21,9 +35,9 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  store,
-  router,
-  i18n,
-  render: h => h(App)
+    el: '#app',
+    store,
+    router,
+    i18n,
+    render: h => h(App)
 })
