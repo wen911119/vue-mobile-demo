@@ -1,6 +1,6 @@
 <template>
     <div class="app-page">
-        demo-list4
+        demo-list-20180123
         <ul>
             <li>
                 <router-link to="/demo/vuex" class="text36">vuex demo</router-link>
@@ -14,9 +14,9 @@
             <li>
                 <router-link to="/banggo/goods" class="text36">ele</router-link>
             </li>
-            <li>
+            <!-- <li>
                 <div class="download" @click="download">下载</div>
-            </li>
+            </li> -->
         </ul>
     </div>
 </template>

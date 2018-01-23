@@ -25,8 +25,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
-      '@': resolve('src'),
-      'cube-ui': 'cube-ui/lib'
+      '@': resolve('src')
     }
   },
   module: {
