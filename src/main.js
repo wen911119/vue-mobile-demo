@@ -1,23 +1,15 @@
 import Vue from 'vue'
 import App from './App'
 import store from './store'
+// import vueRouterEnhancer from 'vue-router-enhancer'
+import vueRouterEnhancer from '@/plugins/vue-router-enhancer.js'
+
 if (window.__INITIAL_STATE__) {
     store.replaceState(window.__INITIAL_STATE__)
 }
 import router from './router'
-console.log(router.push, 44444)
-let temp = router.push.bind(router)
-router.push = (p) => {
-    if (p.path) {
-        store.dispatch('Router/push', { url: p.path })
-    } else {
-        store.dispatch('Router/push', { url: p })
-    }
-    temp(p)
-}
-router.back2 = ()=>{
-    alert()
-}
+
+Vue.use(vueRouterEnhancer(router, store))
 
 import Cube from 'cube-ui'
 import VueI18n from 'vue-i18n'
@@ -41,3 +33,5 @@ new Vue({
     i18n,
     render: h => h(App)
 })
+
+

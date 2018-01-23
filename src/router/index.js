@@ -7,10 +7,10 @@ const i18nDemo = () => import('@/modules/Demo/pages/i18n-demo/app.vue')
 const EleIndex = () => import('@/modules/Index/pages/home/app.vue')
 const GoodsList = () => import('@/modules/Goods/pages/list/app.vue')
 const GoodsDetail = () => import('@/modules/Goods/pages/detail/app.vue')
-console.log(Object.keys(Router))
 Vue.use(Router)
 
 export default new Router({
+    mode:'hash',
     routes: [
         {
             path: '/demo',

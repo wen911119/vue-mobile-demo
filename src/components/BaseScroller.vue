@@ -52,8 +52,8 @@
             }
         },
         methods: {
-            scrollToTop() {
-                this.$refs.scroll.scrollTop = 0
+            scrollTo(p) {
+                this.$refs.scroll.scrollTop = p
             }
         },
         directives: {

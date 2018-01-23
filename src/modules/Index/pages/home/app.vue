@@ -1,5 +1,5 @@
 <template>
-    <app-layout class="app-page" @onScroll="onScroll">
+    <app-layout class="app-page">
         <div class="top-area" slot="layout-top">
             <magic-header @rightClick="toggleMenu=!toggleMenu" :title="'列表页'">
                 <span slot="header-right" class="iconfont">{{toggleMenu?'&#xe629;':'&#xe628;'}}</span>
@@ -23,7 +23,7 @@
     import BaseList from '@/components/BaseList.vue'
     import BaseScroller from '@/components/BaseScroller.vue'
     import HomeListItem from './components/HomeListItem.vue'
-    import { mapState, mapActions } from 'vuex'
+    import { mapState } from 'vuex'
     import AppLayout from 'vue-app-layout'
     export default {
         data() {
@@ -33,7 +33,15 @@
             }
         },
         mounted() {
-            this.$refs.list.doFilter({})
+            if (this.enterType === 'push') {
+                this.$refs.list.doFilter({})
+            } else if (this.enterType === 'back') {
+                let state = this.$store.state.VueRouterEnhancer
+                const p = state.routerStack[state.current.index].meta.position
+                if (p) {
+                    this.$refs.goodsListScroller.scrollTo(p)
+                }
+            }
         },
         methods: {
             format: ret => ({
@@ -55,13 +63,13 @@
                 }
                 params.sort = v.sort
                 this.$refs.list.doFilter(params)
-                this.$refs.goodsListScroller.scrollToTop()
+                this.$refs.goodsListScroller.scrollTo(0)
             },
             goToDetail(pid) {
                 this.$router.push(`goods/${pid}`)
             },
             onScroll(p) {
-                console.log(p)
+                this.$store.dispatch('VueRouterEnhancer/saveMeta', { meta: { position: p } })
             },
             onBottom() {
                 this.$refs.list.loadMore()
