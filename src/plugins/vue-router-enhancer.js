@@ -1,4 +1,9 @@
 export default function (router, store) {
+    window.addEventListener('popstate', function (e) {
+        // console.log(e, 22222)
+        store.dispatch('VueRouterEnhancer/back')
+    }, false)
+    
     store.registerModule('VueRouterEnhancer', {
         namespaced: true,
         state() {
@@ -7,7 +12,7 @@ export default function (router, store) {
                 current: {
                     index: -1,
                     path: '',
-                    enterType: 'push'
+                    enterType: ''
                 }
             }
         },
@@ -62,11 +67,6 @@ export default function (router, store) {
             }
         }
         oldPush(p, onCompleteWrap, onAbort)
-    }
-    var oldBack = router.back.bind(router)
-    router.back = () => {
-        store.dispatch('VueRouterEnhancer/back')
-        oldBack()
     }
     return {
         install(Vue) {

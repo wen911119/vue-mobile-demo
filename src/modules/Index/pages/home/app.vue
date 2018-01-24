@@ -33,6 +33,7 @@
             }
         },
         mounted() {
+            console.log(this.enterType, 77776666655555)
             if (this.enterType === 'push') {
                 this.$refs.list.doFilter({})
             } else if (this.enterType === 'back') {
